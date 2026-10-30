@@ -1,0 +1,12 @@
+# Copy to config.yml (gitignored) and fill in your environment's real API base URL.
+# Never commit config.yml — it may point at a production host.
+
+# Base URL of the OPTIS Product Options `api` backend (NestJS), e.g.:
+#   https://api.optis.me          (production — writes go live on real storefronts immediately)
+#   https://staging-api.optis.me  (staging, if the team has one)
+#   http://localhost:3000         (local api repo running via `npm run dev:api`)
+api_base_url: "<fill-in>"
+
+# Name recorded as the author of the support-content version (shows up in CRM/Developer Hub
+# version history). Use your own name/email, not a generic value.
+author: "<your name>"

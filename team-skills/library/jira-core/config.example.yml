@@ -1,0 +1,52 @@
+# ============================================================
+# config.example.yml — KHUÔN cấu hình jira-core (file NÀY được commit)
+# ------------------------------------------------------------
+# Copy thành `config.yml` (đã .gitignore) rồi điền giá trị THẬT.
+# `config.yml` chứa site/cloudId/project/field + email cá nhân → KHÔNG commit.
+# Skill tự sinh `config.yml` cho bạn ở lần chạy đầu nếu chưa có.
+# Ở khuôn này: phần nhạy cảm/cá nhân để placeholder.
+# ============================================================
+
+# --- Email tài khoản Atlassian (user của Basic auth email:token) ---
+email: "your_email@example.com"                 # [ĐIỀN] email Atlassian của bạn
+
+# --- Site Jira Cloud của team ---
+site: "<your-tenant>.atlassian.net"          # [ĐIỀN] site thật
+
+# --- cloudId: bắt buộc để gọi qua gateway api.atlassian.com với scoped token.
+#     Trống thì script tự fetch từ https://<site>/_edge/tenant_info (public). ---
+cloud_id: ""                                 # trống -> script tự dò
+
+# --- Mẫu link browse cho người đọc ---
+browse_url: "https://<your-tenant>.atlassian.net/browse/{key}"
+
+# --- Xác thực ---
+# Token đọc: (1) env token_env → (2) fallback `pass show pass_entry` (capture, KHÔNG in).
+auth:
+  token_env: "JIRA_PAT"
+  pass_entry: "personal/JIRA_PAT"
+
+# --- Project user truy cập được (scan bằng `jira_client.py projects`). key -> name.
+#     Trống ở khuôn; chạy `projects` để tự điền vào config.yml thật. ---
+projects: {}
+
+# --- Custom field: tên thân thiện <-> customfield id (per-tenant, khác nhau mỗi site).
+#     Trống ở khuôn; điền/self-improve trong config.yml thật. ---
+fields: {}
+
+# --- Alias tên status (câu nói người dùng -> tên status/transition THẬT trên Jira). ---
+#     Seed theo workflow team (xem reference/workflow.md). Value = tên status thật;
+#     kiểm bằng `transitions <KEY>` rồi sửa cho khớp tenant nếu lệch hoa/thường.
+status_aliases:
+  ready for dev: "ready for dev"
+  in dev: "in development"
+  in development: "in development"
+  review: "in code review"
+  in review: "in code review"
+  in code review: "in code review"
+  merge test: "ready for test"
+  ready for test: "ready for test"
+  testing: "testing"
+  golive: "go live"
+  go live: "go live"
+  done: "done"

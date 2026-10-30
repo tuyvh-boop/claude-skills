@@ -1,0 +1,13 @@
+#!/bin/sh
+# Chặn commit nếu phần đã git add có secret. Hook sống trong repo (.githooks/), bật bằng:
+#   git config core.hooksPath .githooks
+# Máy mới clone về phải chạy lại lệnh trên — git không tự bật hook khi clone.
+. "$(dirname "$0")/scan.sh"
+
+if ! scan_staged; then
+  echo "❌ Commit bị chặn: nghi có secret trong phần đã git add." >&2
+  echo "   → Xoá secret, hoặc chuyển file nhạy cảm vào _local/ (đã gitignore), rồi commit lại." >&2
+  echo "   → Chắc chắn báo nhầm: thêm comment 'betterleaks:allow' ở cuối dòng đó." >&2
+  exit 1
+fi
+exit 0

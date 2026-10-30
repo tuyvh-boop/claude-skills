@@ -1,0 +1,37 @@
+# ============================================================
+# config.example.yml — KHUÔN cấu hình fix-shopify-admin-web-vitals (file NÀY được commit)
+# ------------------------------------------------------------
+# Copy thành `config.yml` (đã .gitignore) rồi điền giá trị THẬT.
+# `config.yml` chứa path máy cá nhân + app id → KHÔNG commit.
+# Skill tự tạo `config.yml` từ khuôn này ở lần chạy đầu nếu chưa có.
+# ============================================================
+
+# --- Chế độ chạy ---
+# guided: đi cùng user từng phase (báo trước / hỏi oke / báo sau / hỏi chốt). Dùng lúc mới học skill.
+# auto:   chạy liền mạch, chỉ dừng ở gate duyệt plan (Phase 5).
+run_mode: "guided"
+
+# --- Ngưỡng đích (Built for Shopify, p75 / 28 ngày). Sửa nếu team đặt mục tiêu khác. ---
+targets:
+  lcp_ms: 2500      # Largest Contentful Paint ≤ 2.5s
+  cls: 0.1          # Cumulative Layout Shift ≤ 0.1 (không đơn vị)
+  inp_ms: 200       # Interaction to Next Paint ≤ 200ms
+
+# --- Vòng lặp đo → sửa → đo lại ---
+loop:
+  max_iterations: 5     # tối đa số vòng trước khi dừng lại bàn với user
+
+# --- Gate duyệt plan ---
+plan:
+  require_human_approval: true   # false CHỈ khi user uỷ quyền rõ ("tự làm")
+
+# --- Registry app (mỗi app một entry; key là tên user gọi trong lệnh "fix ... cho app <key>") ---
+# repo_path BẮT BUỘC có .codegraph/ (blast radius dùng CodeGraph, không grep).
+apps:
+  # ví-dụ-app:
+  #   repo_path: "/path/local/toi/repo-app"    # [ĐIỀN] path local, phải đã `codegraph init`
+  #   stack: "remix"                            # remix | node-react | rails | next | ...
+  #   shopify_app_id: ""                        # [ĐIỀN] app id (Partner Dashboard) — chỉ để đối chiếu số
+  #   admin_entry: "app/root.tsx"               # entry document nơi nhúng App Bridge <head>
+  #   worst_routes: []                          # (tuỳ chọn) route đã biết là tệ, để tập trung trước
+  {}

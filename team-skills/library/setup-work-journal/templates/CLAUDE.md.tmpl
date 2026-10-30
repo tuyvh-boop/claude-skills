@@ -1,0 +1,51 @@
+# CLAUDE.md — nhật ký làm việc
+
+Repo này là **nhật ký làm việc** của {{OWNER}} ({{ROLE_LABEL}}). File này là nguồn sự thật duy nhất cho quy ước lưu trữ:
+mỗi lần lưu, Claude đọc file này rồi làm theo, không đoán. Đổi quy ước thì sửa ở đây.
+
+<!-- core:start -->
+## Mục đích
+
+1. **Ghi chép, lưu trữ** tài liệu quá trình làm việc theo task và theo ngày, để quay lại task không mất bối cảnh.
+2. **Quan sát kết quả AI tạo ra** (plan, review, testcase…) nằm cạnh nhau theo task, so được qua thời gian → thấy AI làm tốt / sai
+   ở đâu để tối ưu prompt, skill, cách giao việc.
+
+## 🔴 Bắt buộc
+
+- Repo **PRIVATE** trên GitHub cá nhân. Không đổi sang public, không add người ngoài.
+- Repo nằm ngoài hạ tầng công ty → **không đưa vào file được track:**
+  - credential: token, API key, password, private key, cookie, connection string;
+  - data khách: domain `*.myshopify.com`, shop id, email, đơn hàng, **tên người phía khách** (biên bản họp ghi "khách", "chủ shop") → thay bằng `[redacted]` hoặc mô tả chung;
+  - tài liệu nội bộ nhạy cảm: hợp đồng, số liệu kinh doanh, tài liệu ghi mật, nhận xét về đồng nghiệp.
+- Cần giữ tạm thứ nhạy cảm → `_local/` (đã gitignore, chỉ nằm trên máy).
+- Ảnh chụp, HAR, log: che token / cookie / email khách **trước** khi lưu — scanner không đọc được ảnh.
+- `.githooks/` quét secret trước mỗi commit và push. Máy mới clone về phải bật lại: `git config core.hooksPath .githooks`.
+- Lỡ commit secret: **đổi (rotate) secret đó ngay** — xoá commit không đủ vì lịch sử git là vĩnh viễn.
+
+## Lưu cái gì
+
+- **Lưu:** tài liệu *quá trình* — ghi chú, research, plan, quyết định, review, testcase, kết quả test, bài học, nhận xét về AI.
+- **Không lưu:** code / test / doc của repo app (thuộc repo đó), template nội dung (do skill sinh tài liệu quyết định), file HTML
+  hay slide gửi người khác.
+
+## Đặt tên
+
+- Tên file / folder: chữ thường, không dấu, gạch nối.
+- File **tích luỹ** (nhiều bản theo thời gian): `<yy-mm-dd>-<slug>.md`, ngày nằm ở tên file, không ở folder.
+- File **singleton** (mỗi chỗ 1 bản, sửa tại chỗ): tên cố định, không ngày (`README.md`, `plan-overview.md`…).
+
+## Ghi file & git
+
+- Chưa rõ app / task → hỏi 1 câu, đừng đoán. Tìm folder đã có trước khi tạo mới, không tạo trùng.
+- File đã tồn tại → đọc rồi bổ sung, giữ phần người dùng sửa tay; không đẻ bản thứ hai.
+- `git add` đúng **1 lần, lúc tạo file mới**. Sửa file cũ → không `git add`, để người dùng nhìn diff biết AI vừa sửa gì.
+- Không tự commit / push khi người dùng chưa bảo.
+<!-- core:end -->
+
+## Các loại lưu trữ đang bật
+
+<!-- modules:start -->
+{{MODULE_BLOCKS}}
+<!-- modules:end -->
+
+Thêm loại mới: nói với Claude "thêm phần <X> vào journal".

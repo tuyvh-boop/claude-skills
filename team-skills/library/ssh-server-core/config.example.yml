@@ -1,0 +1,42 @@
+# ============================================================
+# config.example.yml — KHUÔN cấu hình ssh-server-core (file NÀY được commit)
+# ------------------------------------------------------------
+# Copy thành `config.yml` (đã .gitignore) rồi khai server THẬT:
+#   cp config.example.yml config.yml
+#
+# NGUYÊN TẮC: config.yml KHÔNG chứa secret. Kết nối chỉ trỏ tới ALIAS trong
+# ~/.ssh/config (field `ssh_alias`); private key nằm nguyên trong ~/.ssh, script
+# không đọc/không truyền. Host/IP/user do ~/.ssh/config quản, không lặp vào đây.
+#
+# `menu` do lệnh `explore` tự điền ở lần chạy đầu với mỗi server — đừng khai tay.
+# ============================================================
+
+servers:
+  # <ten-ngan>:                       # tên gọi ngắn để dùng trong lệnh, vd: web-staging
+  #   ssh_alias: <alias-trong-ssh-config>   # [ĐIỀN] alias khai trong ~/.ssh/config
+  #   label: "<mô tả người đọc>"            # [ĐIỀN] mô tả ngắn cho người đọc
+  #   explored: false                       # explore xong tự đổi thành true
+  #   menu: []                              # explore tự điền: mỗi mục
+  #                                         #   {option, label, kind, needs_input, input_hint}
+  #                                         #   kind = read | side-effect | exit | unknown
+
+  #   files:                                # (tuỳ chọn) file soi bằng `read-file <server> <key>`
+  #     <key>:
+  #       option: "<số mục Duyệt/đọc file>"
+  #       root: <thư mục gốc mục đó duyệt>  # chỉ để hiển thị
+  #       path: <đường/dẫn/tương/đối>       # duyệt theo TÊN từng bước, không lưu số
+  #       desc: "<file này để làm gì>"
+  #       show: '<regex danh sách trắng>'   # CHỈ in dòng khớp; thiếu → bị chặn. Single-quote: một \ là đủ
+
+  example-server:
+    ssh_alias: my-server-alias
+    label: "Server mẫu — đổi bằng server thật của bạn"
+    explored: false
+    menu: []
+    files:
+      app-toml:
+        option: "3"
+        root: /var/www/example
+        path: app/shopify.app.toml
+        desc: "toml của app trên server (gitignored)"
+        show: '^\s*\[|^\s*(name|client_id|api_version|scopes)\s*='

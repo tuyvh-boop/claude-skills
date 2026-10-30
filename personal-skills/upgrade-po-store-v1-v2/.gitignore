@@ -1,0 +1,4 @@
+# Real config — may contain an internal/production API URL. Never commit.
+config.yml
+__pycache__/
+*.pyc

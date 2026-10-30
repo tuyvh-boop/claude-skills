@@ -1,0 +1,35 @@
+# ============================================================
+# config.example.yml — KHUÔN cấu hình crm-core (file NÀY được commit)
+# ------------------------------------------------------------
+# Copy thành `config.yml` (đã .gitignore) rồi điền giá trị THẬT.
+# `config.yml` chứa base_url nội bộ + scans → KHÔNG commit.
+# Skill tự sinh `config.yml` cho bạn ở lần chạy đầu nếu chưa có.
+# CRM là tool nội bộ → host để placeholder ở khuôn này.
+# ============================================================
+
+# --- Base URL của API (gọi thẳng, không gateway) ---
+base_url: "https://<crm-host>/api"           # [ĐIỀN] host CRM/OSSA nội bộ
+
+# --- Source code CRM đã clone về máy (để tra endpoint khỏi ĐOÁN MÒ) ---
+# Lần đầu dùng: nếu user CÓ source, đăng ký ở đây (nhất là repo backend chứa @Controller/@Get).
+# `source status` verify path còn đúng + có mới hơn remote không; `source sync` pull --ff-only;
+# `source find <keyword>` in bản đồ route. Path lệch (user di chuyển source) -> HỎI lại user path mới.
+source: []                                   # [ĐIỀN] vd: [{role: backend, path: /abs/backend, branch: master}]
+
+# --- Xác thực: header X-API-Key mang token trần (personal API key) ---
+# Token: (1) env CRM_PAT → (2) fallback `pass show personal/CRM_PAT` (capture, KHÔNG in).
+auth:
+  scheme: "header"
+  header_name: "x-api-key"
+  token_env: "CRM_PAT"
+  pass_entry: "personal/CRM_PAT"
+
+# --- Route mà personal API key BỊ CHẶN (nhóm self-admin) — script guard trước khi gọi.
+#     Nguồn: backend API_KEY_DENIED_PATH_PREFIXES. So khớp theo đoạn path. ---
+denied_paths:
+  - ["auth"]
+  - ["users", "me", "api-keys"]
+  - ["mcp", "pat"]
+
+# --- Cache resource user truy cập được (scan bằng `crm_client.py scan`). Tự lớn dần. ---
+resources: {}

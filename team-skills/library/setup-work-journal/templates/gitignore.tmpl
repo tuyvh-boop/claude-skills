@@ -1,0 +1,48 @@
+# ── Nhạy cảm / thô / nháp: không bao giờ lên git ─────────────────
+_local/
+_private/
+secret/
+
+# transcript thô của Claude, dump: chép vào _local/ nếu cần giữ
+*.transcript
+transcripts/
+*.har
+
+# ── Pattern file secret hay gặp ──────────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+*.pat
+id_rsa*
+*-sa.json
+*service-account*.json
+credentials*.json
+secrets.*
+
+# ── OS / editor / cache ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+tools/config.yml
+
+# ── Nghiệm thu: bằng chứng + file đính kèm chỉ nằm ở máy chạy ────
+# Có sẵn cho mọi vai trò (Claude nghiệm thu được cả khi không chọn loại "test").
+# Ảnh / log / dump dễ dính token, cookie, data khách mà scanner không đọc được.
+# Mỗi lượt chỉ track report.md + results.json; cả evidence/ ignore theo folder.
+**/tests/runs/*/evidence/
+# feedback/<yy-mm-dd>-<nguồn>-r<N>.md track; folder cùng tên (ảnh / file người khác gửi) ignore
+**/tests/feedback/*/
+
+# ── Ảnh / video trong folder test: scanner không đọc được ảnh → không lên git ──
+# Ảnh bug hay dính email khách, token trên URL. Cần cho người khác → gửi qua Jira; ghi lại bằng chữ trong report.md.
+**/tests/**/*.png
+**/tests/**/*.jpg
+**/tests/**/*.jpeg
+**/tests/**/*.gif
+**/tests/**/*.webp
+**/tests/**/*.mp4
+**/tests/**/*.webm
+**/tests/**/*.mov

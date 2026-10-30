@@ -1,0 +1,13 @@
+<!doctype html>
+<!-- Fixture: "app" trong iframe — console lỗi, request 404, nút mở tab mới, iframe lồng (bên thứ 3). -->
+<html><head><meta charset="utf-8"><title>Fixture app</title></head>
+<body>
+  <h2>Fixture app</h2>
+  <label>Badge text <input id="badge"></label>
+  <button onclick="document.getElementById('saved').textContent = 'Saved: ' + document.getElementById('badge').value">Save</button>
+  <p id="saved" role="status"></p>
+  <button onclick="console.error('fixture-app-error'); fetch('/api/missing')">Call broken API</button>
+  <button onclick="window.open('http://127.0.0.1:{PORT}/editor.html')">Open editor</button>
+  <iframe title="Third party" src="http://localhost:{PORT}/third-party.html" width="300" height="60"></iframe>
+  <script>console.log('fixture-app-boot mobile=' + /Mobile|iPhone/.test(navigator.userAgent))</script>
+</body></html>

@@ -1,0 +1,16 @@
+# Copy thành config.yml (gitignored) hoặc để `chrome.py setup` tự ghi phần sites.
+port: 9222                                   # cổng debug, chỉ nghe 127.0.0.1
+state_dir: ~/.cache/chrome-core              # sổ owner + lock
+profile_dir: ~/.cache/chrome-core/chrome-profile   # profile Chrome đã đăng nhập (cookie phiên — nhạy cảm, không copy đi đâu)
+chrome_bin: ""                               # để trống = tự tìm google-chrome / chromium
+owner_ttl_hours: 8                           # owner im lâu hơn thế bị coi là bỏ dở (release --stale dọn)
+headless: true                               # Chrome chạy ngầm, không bật cửa sổ cho user; ảnh chụp vẫn lưu bình thường. Đăng nhập lần đầu / hết hạn dùng `launch --headed`
+max_parallel_runs: 2                         # số `run` cùng task chạy song song trước khi cảnh báo (dev server + api của app quá tải → ETIMEDOUT, Fail giả)
+
+sites:                                       # mỗi nền tảng cần đăng nhập một mục; loopback (localhost) luôn được phép
+  example-admin:
+    allowed_origins:
+      - https://admin.example.com/store/[ĐIỀN handle store dev]/   # chỉ store / môi trường dev, không production
+    login_url: https://admin.example.com/
+    login_markers:
+      - accounts.example.com                 # URL chứa đoạn này = đang ở trang đăng nhập → dừng, nhờ user

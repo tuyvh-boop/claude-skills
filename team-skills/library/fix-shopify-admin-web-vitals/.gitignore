@@ -1,0 +1,3 @@
+# Cấu hình thật — chứa path máy cá nhân + app id → KHÔNG commit.
+# Khuôn để commit là config.example.yml.
+config.yml

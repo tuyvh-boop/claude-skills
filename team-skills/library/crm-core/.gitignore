@@ -1,0 +1,7 @@
+# Cấu hình thật — chứa base_url nội bộ + scans → KHÔNG commit.
+# Khuôn để commit là config.example.yml.
+config.yml
+
+# Python cache
+__pycache__/
+*.pyc

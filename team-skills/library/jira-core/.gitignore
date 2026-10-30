@@ -1,0 +1,7 @@
+# Cấu hình thật — chứa site/cloudId/project/field + email cá nhân → KHÔNG commit.
+# Khuôn để commit là config.example.yml.
+config.yml
+
+# Python cache
+__pycache__/
+*.pyc

@@ -1,0 +1,8 @@
+<!doctype html>
+<!-- Fixture: trang "host" nhúng một app khác site (localhost vs 127.0.0.1 = 2 site → iframe tách process như app nhúng trong admin). -->
+<html><head><meta charset="utf-8"><title>Fixture host</title></head>
+<body>
+  <h1>Fixture host</h1>
+  <button id="host-btn">Host button</button>
+  <iframe id="app" name="app-iframe" src="http://127.0.0.1:{PORT}/app.html" width="640" height="320"></iframe>
+</body></html>

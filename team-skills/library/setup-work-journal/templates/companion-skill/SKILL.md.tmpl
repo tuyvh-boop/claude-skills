@@ -1,0 +1,40 @@
+---
+name: journal-save
+description: Use when a work artifact must be saved into the user's work journal — research, plan, decision, review, testcase, test run, requirement note, meeting note, daily log, task retro — "lưu cái này vào journal", "lưu vào nhật ký làm việc của task ABC-123", "ghi daily log", "ghi vào retro". NOT for files that belong to an app repo (code, test, docs of that repo), and NOT for creating or restructuring the journal itself (setup-work-journal).
+---
+
+# journal-save
+
+Cất tài liệu quá trình làm việc vào nhật ký làm việc của {{OWNER}} cho đúng chỗ. Skill này chỉ **tìm journal + đặt file**; mọi
+quy ước (loại nào lưu đâu, đặt tên ra sao) nằm ở `CLAUDE.md` của journal — **đọc file đó mỗi lần lưu, không chép luật vào đây.**
+
+**Journal ở đâu:** skill này nằm trong chính journal, ở `<journal>/.claude/skills/journal-save/SKILL.md`. Lấy path thật của
+thư mục skill (`readlink -f ~/.claude/skills/journal-save`), bỏ đuôi `/.claude/skills/journal-save` là ra gốc journal.
+
+## Các bước
+
+1. **Tìm journal** như trên → đọc `<journal>/CLAUDE.md`.
+2. **Xác định loại** tài liệu theo các khối trong mục "Các loại lưu trữ đang bật". Không khớp loại nào → hỏi 1 câu (lưu thành
+   ghi chép lẻ ở gốc task, hay thêm loại mới qua setup-work-journal). Không tự đặt folder mới.
+3. **Chọn task** (nếu loại gắn task): đã chốt trong session thì dùng lại; chưa → tìm `apps/<app>/*<mã>*` trước, có thì dùng; chưa
+   có thì tự đặt `[<mã>]-<brief>`, tạo kèm `README.md` (mục tiêu 1–2 dòng), nói tên folder trong câu báo (user muốn đổi thì đổi
+   sau). Không rõ app / mã task → hỏi 1 câu, đừng đoán. README task chỉ sửa khi có kết quả / quyết định đáng ghi, không cập
+   nhật mỗi lần lưu.
+4. **Tính path** theo bảng của loại đó: tích luỹ → `<yy-mm-dd>-<slug>.md` với ngày hôm nay (`date +%y-%m-%d`); singleton → tên cố
+   định.
+5. **Ghi.** File đã có → đọc rồi bổ sung, giữ phần người dùng sửa tay. File mới → Write rồi `git -C <journal> add <file>`
+   **đúng 1 lần**. Câu kiểm: *path này đã tồn tại trước lần Write vừa rồi chưa?* Có → không `git add`. Không commit, không push.
+   `git status` hiện `AM` (đã add bản đầu, còn sửa sau) là bình thường — lúc commit, người dùng add lại cả file.
+6. **Báo 1 dòng** path vừa ghi (markdown link tuyệt đối).
+
+## Không làm
+
+- Không ghi file thuộc repo app (code, test, README, docs của repo đó) vào journal, và ngược lại.
+- Không ghi secret / token / data khách / tài liệu nội bộ nhạy cảm vào file được track → `_local/` hoặc không lưu.
+- Không lưu bản HTML / slide gửi người khác; chỉ lưu `.md`.
+
+## Common Mistakes
+
+- Tạo folder task trùng vì không tìm trước → luôn tìm theo mã / brief.
+- `git add` lại file đã có → người dùng mất dấu AI vừa sửa gì.
+- Chép luật của journal vào đây → hai nguồn, sẽ lệch. Đổi quy ước thì sửa `CLAUDE.md` của journal.

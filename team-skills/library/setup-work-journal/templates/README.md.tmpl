@@ -1,0 +1,32 @@
+# {{REPO_NAME}}
+
+Nhật ký làm việc của {{OWNER}} ({{ROLE_LABEL}}). **Repo private — không public, không đưa tài liệu nội bộ nhạy cảm vào.**
+
+Quy ước lưu (đặt tên, chỗ lưu, luật secret) ở [CLAUDE.md](CLAUDE.md). File này chỉ mô tả cây folder và cách dùng.
+
+## Repo này giúp gì
+
+{{BENEFITS}}
+
+## Cây folder
+
+<!-- tree:start -->
+{{TREE}}
+<!-- tree:end -->
+
+Folder chỉ xuất hiện khi có nội dung; task đơn giản có thể chỉ dùng vài mục.
+
+## Dùng hằng ngày
+
+Nói với Claude bằng lời thường, Claude tự đặt tên và chỗ lưu theo `CLAUDE.md`:
+
+{{USAGE}}
+
+## Máy mới
+
+```bash
+git clone <url-repo-private> && cd {{REPO_NAME}}
+git config core.hooksPath .githooks
+```
+
+Rồi nhờ Claude "kiểm tra journal": Claude kiểm hook, scanner betterleaks và link lại skill `journal-save` nếu bạn dùng.
